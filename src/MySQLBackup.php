@@ -20,6 +20,7 @@ class MySQLBackup
      */
     public $db = array(
         'host'      => null,
+		'port' 		=> null,
         'user'      => null,
         'password'  => null,
         'name'      => null,
@@ -115,15 +116,17 @@ class MySQLBackup
     /**
      * Initialization
      *
-     * @param string $host     SQL host
      * @param string $user     Username
      * @param string $password Password
      * @param string $db       DB name
+     * @param string $host     SQL host
+     * @param string $port     SQL port server default value 3306
      */
-    public function __construct($host, $user, $password, $db)
+    public function __construct($user, $password, $db, $host, $port=3306)
     {
         $this->db = array(
             'host'      => $host,
+            'port'      => $port,
             'user'      => $user,
             'password'  => $password,
             'name'      => $db,
@@ -141,7 +144,7 @@ class MySQLBackup
      */
     private function databaseConnect()
     {
-        $dsn = 'mysql:host='.$this->db['host'].';dbname='.$this->db['name'];
+        $dsn = "mysql:host={$this->db['host']};port={$this->db['port']};dbname={$this->db['name']}";
 
         $options = array(
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
