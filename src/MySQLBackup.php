@@ -20,7 +20,7 @@ class MySQLBackup
      */
     public $db = array(
         'host'      => null,
-		'port' 		=> null,
+        'port' 	    => null,
         'user'      => null,
         'password'  => null,
         'name'      => null,
